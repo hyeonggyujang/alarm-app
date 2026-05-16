@@ -1,0 +1,19 @@
+services:
+  nature-alarm:
+    build: .
+    container_name: nature-alarm
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    # Pass the host's ALSA sound card into the container
+    # devices:
+    #   - /dev/snd:/dev/snd
+    # environment:
+    #   - SDL_AUDIODRIVER=alsa
+    #   - ALSA_CARD=0          # change if your speaker is on card 1
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=America/New_York
+    volumes:
+      # Optional: mount a local sounds folder to swap audio files without rebuild
+      - ./app/assets:/app/app/assets:ro
